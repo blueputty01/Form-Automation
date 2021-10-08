@@ -1,60 +1,107 @@
 wizard();
 
 function wizard() {
-  //'12244241432442332123431124321232'
-  //BCDCBCDDBADCDBBDCCADBDDABDBCCADAAACB
-  offset = prompt("Offset (how many questions before start?): ", "");
-  totalChoices = prompt("How many choices?");
-  read = prompt("Paste answer key:", "");
-  //convert to ABCD type key
-  let filteredRead = "";
-  if (read.indexOf("A") > 0) {
-    filteredRead = read.replaceAll(/[^a-zA-Z]/g, "").toUpperCase();
-    // console.log(filteredRead);
-  } else {
-    // output spreadsheet-ready key from answer key online
-    for (i = 0; i < read.length; i++) {
-      filteredRead += String.fromCharCode(
-        read.charCodeAt(i) - "1".charCodeAt(0) + "A".charCodeAt(0)
-      );
+  main();
+
+  function main() {
+    getAnswerKeys();
+    const { offset, totalChoices, key, keyForKey } = readData();
+
+    let abcd;
+    let num;
+
+    const keyForKeyArr = keyForKey.split("");
+    let scriptKey;
+    if (key.indexOf("A") > 0) {
+      // output spreadsheet-ready key from answer key online
+      abcd = key;
+      num = get1234(key, keyForKeyArr);
+      scriptKey = getScriptKey(num);
+    } else {
+      num = key.split("");
+      for (let i = 0; i < num.length; i++) {
+        num[i] = parseInt(num[i]);
+      }
+      scriptKey = getScriptKey(num);
+      abcd = getHuman(scriptKey, keyForKeyArr);
     }
+
+    spreadSheet(abcd);
+
+    inputKey(totalChoices, offset, scriptKey);
   }
 
-  spreadSheet();
+  function getScriptKey(numKey) {
+    for (let i = 0; i < numKey.length; i++) {
+      numKey[i]--;
+    }
+    return numKey;
+  }
 
-  // converts ABCD based key to 1234 based
-  let ca = filteredRead.split("");
-  let key = [];
-  ca.forEach((c) => {
-    key.push(c.charCodeAt(0) - "A".charCodeAt(0));
-  });
+  function get1234(abcd, keyForKey) {
+    // converts ABCD based key to 1234 based
+    let abcdArr = abcd.split("");
+    let key = [];
+    abcdArr.forEach((c) => {
+      keyForKey.findIndex(c);
+      key.push();
+    });
+  }
 
-  inputKey(4);
+  function getHuman(num, keyForKey) {
+    //convert to ABCD type key
+    let abcd = "";
+    num.forEach((n) => {
+      abcd += String.fromCharCode(keyForKey[n]);
+    });
+    return abcd;
+  }
 
-  function spreadSheet() {
+  function readData() {
+    // var offset = parseInt(
+    //   prompt("Offset (how many questions before start?): ", "")
+    // );
+    // var totalChoices = parseInt(prompt("How many choices?"));
+    // var key = prompt("Paste answer key:", "");
+    // var keyForKey = prompt("Key for key:", "");
+
+    offset = 0;
+    totalChoices = "2";
+    key = "1121212212";
+    keyForKey = "✔️❌";
+
+    return {
+      offset,
+      totalChoices,
+      key,
+      keyForKey,
+    };
+  }
+
+  function spreadSheet(k) {
     //make string spreadsheet
     let answerKey = "";
-    for (let i = 0; i < filteredRead.length; i++) {
-      answerKey += filteredRead.charAt(i) + "	";
+    for (let i = 0; i < k.length; i++) {
+      answerKey += k.charAt(i) + "	";
     }
-    console.log(answerKey);
+    console.log(k);
   }
 
-  function inputKey() {
+  function inputKey(choices, offset, key) {
     const checkboxes = Array.from(
       document.getElementsByClassName(
         "quantumWizTogglePaperradioRadioContainer"
       )
     );
     for (
-      let answerIndex = 0, checkboxIndex = parseInt(offset) * totalChoices;
+      let answerIndex = 0, checkboxIndex = offset * choices;
       answerIndex < key.length;
       answerIndex++
     ) {
       const answer = key[answerIndex];
       checkboxIndex += answer;
       checkboxes[checkboxIndex].click();
-      checkboxIndex += totalChoices - answer;
+      checkboxIndex += choices - answer;
     }
   }
 
@@ -67,7 +114,9 @@ function wizard() {
       const [keyButton] = question.querySelectorAll(
         '[data-tooltip="Answer key and points"]'
       );
-      keyButton.click();
+      if (keyButton != null) {
+        keyButton.click();
+      }
     }
   }
 }
