@@ -13,10 +13,11 @@
 
       const keyForKeyArr = keyForKey.split("");
       let scriptKey;
-      if (key.indexOf("A") > 0) {
+      if (key.match(/[A-Z]/g)) {
         // output spreadsheet-ready key from answer key online
         abcd = key.split("");
-        num = get1234(key, keyForKeyArr);
+        num = get1234(abcd, keyForKeyArr);
+        console.log(num);
         scriptKey = getScriptKey(num);
       } else {
         num = key.replaceAll(" ", "");
@@ -25,12 +26,11 @@
           num[i] = parseInt(num[i]);
         }
         scriptKey = getScriptKey(num);
-        console.log(scriptKey);
         abcd = getHuman(scriptKey, keyForKeyArr);
       }
 
       spreadSheet(abcd);
-
+      console.log(scriptKey);
       inputKey(totalChoices, offset, scriptKey);
     }
 
@@ -43,38 +43,35 @@
 
     function get1234(abcd, keyForKey) {
       // converts ABCD based key to 1234 based
-      let abcdArr = abcd.split("");
       let key = [];
-      abcdArr.forEach((c) => {
-        keyForKey.findIndex(c);
-        key.push();
+      console.log(keyForKey);
+      abcd.forEach((c) => {
+        key.push(keyForKey.findIndex((ele) => ele == c) + 1);
       });
+      return key;
     }
 
     function getHuman(num, keyForKey) {
       //convert to ABCD type key
-      let abcd = "";
-      console.log(keyForKey);
+      let abcd = [];
       num.forEach((n) => {
-        console.log(n);
-        console.log(keyForKey[n]);
-        abcd += keyForKey[n];
+        abcd.push(keyForKey[n]);
       });
       return abcd;
     }
 
     function readData() {
-      var offset = parseInt(
-        prompt("Offset (how many questions before start?): ", "")
-      );
-      var totalChoices = parseInt(prompt("How many choices?"));
-      var key = prompt("Paste answer key:", "");
-      var keyForKey = prompt("Key for key:", "");
+      // var offset = parseInt(
+      //   prompt("Offset (how many questions before start?): ")
+      // );
+      // var totalChoices = parseInt(prompt("How many choices?"));
+      // var key = prompt("Paste answer key:");
+      // var keyForKey = prompt("Key for key:");
 
-      // offset = 0;
-      // totalChoices = "2";
-      // key = "1121212212";
-      // keyForKey = "✔❌";
+      offset = 0;
+      totalChoices = "4";
+      key = "23331 44423 13331 24123";
+      keyForKey = "ABCD";
 
       return {
         offset,
@@ -84,13 +81,13 @@
       };
     }
 
-    function spreadSheet(k) {
+    function spreadSheet(abcd) {
       //make string spreadsheet
       let answerKey = "";
-      for (let i = 0; i < k.length; i++) {
-        answerKey += k.charAt(i) + "	";
+      for (let i = 0; i < abcd.length; i++) {
+        answerKey += abcd[i] + "	";
       }
-      console.log(k);
+      console.log(answerKey);
     }
 
     function inputKey(choices, offset, key) {
