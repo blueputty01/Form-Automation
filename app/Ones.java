@@ -15,7 +15,7 @@ public class Ones {
         } catch (AWTException e) {
             e.printStackTrace();
         }
-        questions(4, 19);
+        questions(4, 7);
     }
 
     private static void questions(int options, int len) {
@@ -25,7 +25,7 @@ public class Ones {
                 press(KeyEvent.VK_TAB);
             }
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
