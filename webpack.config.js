@@ -1,11 +1,18 @@
+// @ts-nocheck
 const path = require('path');
 const BookmarkletPlugin = require('./webpack/BookmarkletPlugin');
 
+const fileNames = ['open'];
+const files = fileNames.reduce((prev, curr) => {
+  prev[curr] = `./src/${curr}.js`;
+  return prev;
+}, {});
+
+console.log(files);
+
 module.exports = {
   mode: 'production',
-  entry: {
-    comment: './src/open.js',
-  },
+  entry: files,
   module: {
     rules: [
       {
@@ -17,7 +24,7 @@ module.exports = {
   },
   resolve: { extensions: ['.ts', '.js'] },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
     filename: '[name].js',
     clean: true,
   },

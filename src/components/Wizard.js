@@ -1,6 +1,6 @@
 // @ts-nocheck
-import Interactions from './components/FormInteractions';
-import Converter from './components/Converter';
+import Interactions from './FormInteractions';
+import Converter from './Converter';
 class Wizard {
   form;
   converter;
