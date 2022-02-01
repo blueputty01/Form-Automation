@@ -4,10 +4,13 @@ import Converter from './Converter';
 class Wizard {
   form;
   converter;
-  constructor() {
+  constructor(clear = false) {
     this.form = new Interactions();
     this.converter = new Converter();
     this.form.showAnswerKeys();
+    if (clear) {
+      this.form.clear();
+    }
   }
   fill(props) {
     // { offset, totalChoices, key, keyForKey }
@@ -19,7 +22,7 @@ class Wizard {
     let scriptKey;
     if (!props.key.match(/d/g)) {
       // output spreadsheet-ready key from answer key online
-      abcd = key.split('');
+      abcd = props.key.split('');
       num = this.converter.get1234(abcd, keyForKeyArr);
       console.log(num);
       scriptKey = this.converter.getScriptKey(num);
@@ -34,7 +37,7 @@ class Wizard {
 
     this.converter.spreadSheet(abcd);
     console.log(scriptKey);
-    this.converter.inputKey(props.totalChoices, props.offset, props.scriptKey);
+    this.form.inputKey(props.totalChoices, props.offset, props.scriptKey);
   }
 
   readData() {

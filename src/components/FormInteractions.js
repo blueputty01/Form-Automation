@@ -41,7 +41,7 @@ class FormInteractions {
       )
     );
     // i starts from question number
-    for (let i = start; i < end; i++) {
+    for (let i = start ? start : 0; i < end ? end : checked.length; i++) {
       const ele = checked[i];
       if (ele.classList.contains('isChecked')) {
         ele.click();

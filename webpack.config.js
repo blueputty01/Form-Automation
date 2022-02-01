@@ -28,5 +28,5 @@ module.exports = {
     filename: '[name].js',
     clean: true,
   },
-  plugins: [new BookmarkletPlugin()],
+  // plugins: [new BookmarkletPlugin()],
 };
