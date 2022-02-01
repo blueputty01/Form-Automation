@@ -1,0 +1,30 @@
+{
+  "name": "form-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --watch",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blue-putty/Form-Automation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blue-putty/Form-Automation/issues"
+  },
+  "homepage": "https://github.com/blue-putty/Form-Automation#readme",
+  "devDependencies": {
+    "@types/node": "^16.11.8",
+    "@types/webpack": "^5.28.0",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.2",
+    "webpack": "^5.64.1",
+    "webpack-cli": "^4.7.2",
+    "wepack-cli": "0.0.1-security"
+  }
+}

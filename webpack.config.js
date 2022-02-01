@@ -1,24 +1,24 @@
-const path = require("path");
-const BookmarkletPlugin = require("./webpack/BookmarkletPlugin");
+const path = require('path');
+const BookmarkletPlugin = require('./webpack/BookmarkletPlugin');
 
 module.exports = {
-  mode: "production",
+  mode: 'production',
   entry: {
-    comment: "./src/comment.js",
+    comment: './src/open.js',
   },
   module: {
     rules: [
       {
         test: /\.ts$/,
         exclude: [/node_modules/],
-        loader: "ts-loader",
+        loader: 'ts-loader',
       },
     ],
   },
-  resolve: { extensions: [".ts"] },
+  resolve: { extensions: ['.ts'] },
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
     clean: true,
   },
   plugins: [new BookmarkletPlugin()],
