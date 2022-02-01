@@ -64,7 +64,10 @@
         prompt("Offset (how many questions before start?): ")
       );
       var key = prompt("Paste answer key:");
+      //replace spaces
       key = key.replaceAll(" ", "");
+      //replace next column characters
+      key = key.replaceAll("	", "");
       var keyForKey = prompt("Key for key:");
       var totalChoices = keyForKey.length;
 
