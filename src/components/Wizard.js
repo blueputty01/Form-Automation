@@ -1,19 +1,31 @@
 // @ts-nocheck
 import Interactions from './FormInteractions';
 import Converter from './Converter';
+import HumanInteraction from './HumanInteraction';
 class Wizard {
   form;
   converter;
-  constructor(clear = false) {
+  human;
+  constructor(options) {
     this.form = new Interactions();
     this.converter = new Converter();
+    this.human = new HumanInteraction();
     this.form.showAnswerKeys();
-    if (clear) {
+    if (options?.clear) {
       this.form.clear();
     }
   }
   fill(props) {
-    // { offset, totalChoices, key, keyForKey }
+    if (!props.offset) {
+      props.offset = human.promptOffset();
+    }
+    if (!props.key) {
+      props.key = human.promptKey();
+    }
+    if (!props.keyForKey) {
+      props.keyForKey = human.promptKeyForKey();
+      props.totalChoices = props.keyForKey.length;
+    }
 
     let abcd;
     let num;
@@ -37,27 +49,7 @@ class Wizard {
 
     this.converter.spreadSheet(abcd);
     console.log(scriptKey);
-    this.form.inputKey(props.totalChoices, props.offset, props.scriptKey);
-  }
-
-  readData() {
-    var offset = parseInt(
-      prompt('Offset (how many questions before start?): ')
-    );
-    var key = prompt('Paste answer key:');
-    //replace spaces
-    key = key.replaceAll(' ', '');
-    //replace next column characters
-    key = key.replaceAll('	', '');
-    var keyForKey = prompt('Key for key:');
-    var totalChoices = keyForKey.length;
-
-    return {
-      offset,
-      totalChoices,
-      key,
-      keyForKey,
-    };
+    this.form.inputKey(props.totalChoices, props.offset, scriptKey);
   }
 }
 

@@ -6,6 +6,7 @@ class FormInteractions {
         'quantumWizTogglePaperradioRadioContainer'
       )
     );
+    console.log(key);
     for (
       let answerIndex = 0, checkboxIndex = offset;
       answerIndex < key.length;
@@ -33,15 +34,21 @@ class FormInteractions {
     }
   };
 
-  clear = (start, end) => {
+  clear = (start = -1, end = -1) => {
     //uncheck all boxes
     let checked = Array.from(
       document.getElementsByClassName(
         'freebirdFormeditorViewAssessmentGridbodyCorrectAnswerToggle '
       )
     );
+    // console.log(checked);
     // i starts from question number
-    for (let i = start ? start : 0; i < end ? end : checked.length; i++) {
+    console.log(checked);
+    for (
+      let i = start === -1 ? start : 0;
+      i < (end === -1 ? end : checked.length);
+      i++
+    ) {
       const ele = checked[i];
       if (ele.classList.contains('isChecked')) {
         ele.click();
