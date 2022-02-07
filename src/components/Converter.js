@@ -9,7 +9,6 @@ class Converter {
   get1234 = (abcd, keyForKey) => {
     // converts ABCD based key to 1234 based
     let key = [];
-    console.log(keyForKey);
     abcd.forEach((c) => {
       key.push(keyForKey.findIndex((ele) => ele == c) + 1);
     });

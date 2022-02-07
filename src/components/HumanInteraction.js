@@ -5,6 +5,7 @@ class HumanInteraction {
     key = key.replaceAll(' ', '');
     //replace next column characters
     key = key.replaceAll('	', '');
+    return key;
   }
   promptKeyForKey() {
     return prompt('Key for key:');

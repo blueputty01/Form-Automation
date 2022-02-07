@@ -16,16 +16,16 @@ class Wizard {
     }
   }
   fill(props) {
-    if (!props.offset) {
-      props.offset = human.promptOffset();
+    if (!('offset' in props)) {
+      props.offset = this.human.promptOffset();
     }
-    if (!props.key) {
-      props.key = human.promptKey();
+    if (!('key' in props)) {
+      props.key = this.human.promptKey();
     }
-    if (!props.keyForKey) {
-      props.keyForKey = human.promptKeyForKey();
-      props.totalChoices = props.keyForKey.length;
+    if (!('keyForKey' in props)) {
+      props.keyForKey = this.human.promptKeyForKey();
     }
+    const totalChoices = props.keyForKey.length;
 
     let abcd;
     let num;
@@ -36,7 +36,6 @@ class Wizard {
       // output spreadsheet-ready key from answer key online
       abcd = props.key.split('');
       num = this.converter.get1234(abcd, keyForKeyArr);
-      console.log(num);
       scriptKey = this.converter.getScriptKey(num);
     } else {
       num = props.key.split('');
@@ -48,8 +47,7 @@ class Wizard {
     }
 
     this.converter.spreadSheet(abcd);
-    console.log(scriptKey);
-    this.form.inputKey(props.totalChoices, props.offset, scriptKey);
+    this.form.inputKey(totalChoices, props.offset, scriptKey);
   }
 }
 
