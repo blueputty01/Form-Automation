@@ -2,7 +2,7 @@
 const path = require('path');
 const BookmarkletPlugin = require('./webpack/BookmarkletPlugin');
 
-const fileNames = ['free', 'strive', 'harvest'];
+const fileNames = ['free', 'strive', 'harvest', 'hsk4'];
 const files = fileNames.reduce((prev, curr) => {
   prev[curr] = `./src/${curr}.js`;
   return prev;
