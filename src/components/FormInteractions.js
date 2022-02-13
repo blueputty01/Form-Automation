@@ -19,6 +19,15 @@ class FormInteractions {
     }
   };
 
+  setShortAnswer = (correct) => {
+    let inputs = document.querySelectorAll(
+      '[aria-label="Add a correct answer"]'
+    );
+    // for (let i = 0; i < correct.length; i++) {
+    inputs[0].click();
+    // }
+  };
+
   showAnswerKeys = () => {
     const questions = document.getElementsByClassName(
       'freebirdFormeditorViewItemContentWrapper'
