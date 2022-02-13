@@ -8,7 +8,7 @@ let keyForKey = '✅❎';
 wiz.fill({ offset, keyForKey });
 offset += 2 * 10;
 
-let keyForKey = 'ABCD';
+keyForKey = 'ABCD';
 wiz.fill({ offset, keyForKey });
 offset += 4 * 15;
 
