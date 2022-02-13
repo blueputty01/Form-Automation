@@ -12,6 +12,7 @@ class Wizard {
     this.human = new HumanInteraction();
     this.form.showAnswerKeys();
     if (options?.clear) {
+      console.log(clear);
       this.form.clear();
     }
   }

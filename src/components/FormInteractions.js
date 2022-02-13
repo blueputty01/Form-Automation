@@ -34,19 +34,19 @@ class FormInteractions {
     }
   };
 
-  clear = (start = -1, end = -1) => {
+  clear = (start = 0, end = -1) => {
     //uncheck all boxes
     let checked = Array.from(
       document.getElementsByClassName(
         'freebirdFormeditorViewAssessmentGridbodyCorrectAnswerToggle '
       )
     );
+
+    if (end === -1) {
+      end = checked.length;
+    }
     // i starts from question number
-    for (
-      let i = start === -1 ? start : 0;
-      i < (end === -1 ? end : checked.length);
-      i++
-    ) {
+    for (let i = start; i < end; i++) {
       const ele = checked[i];
       if (ele.classList.contains('isChecked')) {
         ele.click();
