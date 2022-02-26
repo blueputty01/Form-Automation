@@ -12,7 +12,6 @@ class Wizard {
     this.human = new HumanInteraction();
     this.form.showAnswerKeys();
     if (options?.clear) {
-      console.log(clear);
       this.form.clear();
     }
   }
@@ -33,12 +32,14 @@ class Wizard {
 
     const keyForKeyArr = props.keyForKey.split('');
     let scriptKey;
-    if (!props.key.match(/d/g)) {
+    console.log(props.key);
+    if (!props.key.match(/\d/g)) {
       // output spreadsheet-ready key from answer key online
       abcd = props.key.split('');
       num = this.converter.get1234(abcd, keyForKeyArr);
       scriptKey = this.converter.getScriptKey(num);
     } else {
+      console.log('hi');
       num = props.key.split('');
       for (let i = 0; i < num.length; i++) {
         num[i] = parseInt(num[i]);
