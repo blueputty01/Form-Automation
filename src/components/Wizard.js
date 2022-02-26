@@ -13,6 +13,10 @@ class Wizard {
     this.form.showAnswerKeys();
     if (options?.clear) {
       this.form.clear();
+
+      if (options?.onClear) {
+        setTimeout(options.onClear, 2000);
+      }
     }
   }
   fill(props) {
