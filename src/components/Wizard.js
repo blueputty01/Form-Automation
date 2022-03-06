@@ -10,21 +10,22 @@ class Wizard {
     this.form = new Interactions();
     this.converter = new Converter();
     this.human = new HumanInteraction();
-    this.form.showAnswerKeys();
-    if (options?.clear) {
-      this.form.clear();
 
-      if (options?.onClear) {
-        setTimeout(options.onClear, 2000);
-      }
+    if (options?.clear) {
+      setTimeout(() => {
+        this.form.clear();
+      }, 1000);
     }
   }
-  fill(props) {
+  clear() {
+    return this.form.clear();
+  }
+  fill(props = {}) {
     if (!('offset' in props)) {
       props.offset = this.human.promptOffset();
     }
     if (!('key' in props)) {
-      props.key = this.human.promptKey();
+      props.key = this.human.promptKey(props);
     }
     if (!('keyForKey' in props)) {
       props.keyForKey = this.human.promptKeyForKey();
@@ -36,14 +37,12 @@ class Wizard {
 
     const keyForKeyArr = props.keyForKey.split('');
     let scriptKey;
-    console.log(props.key);
     if (!props.key.match(/\d/g)) {
       // output spreadsheet-ready key from answer key online
       abcd = props.key.split('');
       num = this.converter.get1234(abcd, keyForKeyArr);
       scriptKey = this.converter.getScriptKey(num);
     } else {
-      console.log('hi');
       num = props.key.split('');
       for (let i = 0; i < num.length; i++) {
         num[i] = parseInt(num[i]);

@@ -1,10 +1,15 @@
 class HumanInteraction {
-  promptKey() {
+  promptKey(props = {}) {
     let key = prompt('Paste answer key:');
-    //replace spaces
-    key = key.replaceAll(' ', '');
-    //replace next column characters
-    key = key.replaceAll('	', '');
+
+    if (props?.letters) {
+      key = key.replaceAll(/[^a-zA-Z]/g, '');
+    } else {
+      //replace spaces
+      key = key.replaceAll(' ', '');
+      //replace next column characters
+      key = key.replaceAll('	', '');
+    }
     return key;
   }
   promptKeyForKey() {

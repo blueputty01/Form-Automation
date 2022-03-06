@@ -22,6 +22,9 @@ module.exports = {
       },
     ],
   },
+  experiments: {
+    topLevelAwait: true,
+  },
   resolve: { extensions: ['.ts', '.js'] },
   output: {
     path: path.resolve(__dirname, 'build'),
