@@ -1,9 +1,10 @@
 // @ts-nocheck
 import Wizard from './components/Wizard';
 
-const wiz = new Wizard({ clear: true, onClear });
+const wiz = new Wizard();
 
 await wiz.clear();
+
 let offset = 0;
 
 let keyForKey = '✔❌';
