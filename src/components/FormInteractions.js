@@ -49,7 +49,6 @@ class FormInteractions {
   };
 
   clear = async (start = 0, end = -1) => {
-    console.log('hi');
     //uncheck all boxes
     if (end === -1) {
       end = this.checkboxes.length;
